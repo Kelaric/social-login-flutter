@@ -1,12 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fb_fire_login/home.dart';
+import 'package:google_fb_fire_login/login.dart';
+import 'package:google_fb_fire_login/modules/login/bloc/social_login_bloc.dart';
 import 'package:google_fb_fire_login/routes.dart';
 import 'package:google_fb_fire_login/services/google_login.dart' as AuthService;
 import 'package:google_fb_fire_login/services/fb_login.dart' as FbLoginService;
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
+}
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SocialLoginBloc(),
+      child: LoginPage(),
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -54,7 +67,7 @@ class _MyAppState extends State<MyApp> {
                     textColor: Colors.white,
                     color: Colors.redAccent,
                     onPressed: () async {
-                      var user = await AuthService.signInWithGoogle(context);
+                      var user = await AuthService.signInWithGoogle();
                       if (user.email.isNotEmpty) {
                         Navigator.pushNamed(context, '/home');
                       }

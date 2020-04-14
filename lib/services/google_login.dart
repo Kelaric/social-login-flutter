@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:google_fb_fire_login/home.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-Future<FirebaseUser> signInWithGoogle(BuildContext context) async {
+Future<FirebaseUser> signInWithGoogle() async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   Firestore firestoreDb = Firestore.instance;
 
